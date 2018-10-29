@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+</head>
+<body>
+<form method="post" th:action="@{/signup}">
+
+  <!--/*@thymesVar id="user" type="com.iisereb.sensorms.entities.UserEntity"*/-->
+  <div th:if="${user ne null}">
+    <input type="text" placeholder="First name" name="firstName" th:value="${user.getFirstName()}"><br>
+    <input type="text" placeholder="Last name" name="lastName" th:value="${user.getLastName()}"><br>
+    <input type="text" placeholder="xxx-xxx-xxxx" name="phone" th:value="${user.getPhone()}"><br>
+    <input type="email" name="email" placeholder="E-mail" th:value="${user.getEmail()}"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <input type="password" name="passwordAgain" placeholder="Repeat password"><br>
+    <input type="submit">
+  </div>
+  <div th:if="${user eq null}">
+    <input type="text" placeholder="First name" name="firstName"><br>
+    <input type="text" placeholder="Last name" name="lastName"><br>
+    <input type="text" placeholder="xxx-xxx-xxxx" name="phone"><br>
+    <input type="email" name="email" placeholder="E-mail"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <input type="password" name="passwordAgain" placeholder="Repeat password"><br>
+    <input type="submit">
+  </div>
+  <!--/*@thymesVar id="errors" type="java.util.List"*/-->
+  <div th:each="error: ${errors}">
+    <p th:text="${error}"></p>
+  </div>
+
+</form>
+
+</body>
+</html>

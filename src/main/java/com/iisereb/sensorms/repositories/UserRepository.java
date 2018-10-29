@@ -1,0 +1,15 @@
+package com.iisereb.sensorms.repositories;
+
+import com.iisereb.sensorms.entities.UserEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends CrudRepository<UserEntity, Long> {
+
+    Optional<UserEntity> findByEmailAndPassword(String username, String password);
+    Optional<UserEntity> findByEmail(String email);
+
+}
