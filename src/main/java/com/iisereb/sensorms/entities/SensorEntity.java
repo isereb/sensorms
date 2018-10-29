@@ -17,7 +17,7 @@ public class SensorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sensorId;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserEntity.class)
+    @ManyToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
     @JoinColumn(name = "owner", referencedColumnName = "userId")
     private UserEntity owner;
 
