@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,7 +18,7 @@ public class SensorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long sensorId;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = UserEntity.class)
+    @OneToOne(fetch = FetchType.LAZY, targetEntity = UserEntity.class)
     @JoinColumn(name = "owner", referencedColumnName = "userId")
     private UserEntity owner;
 
@@ -25,6 +26,16 @@ public class SensorEntity {
     private String description;
     private double maxThreshold;
     private double minThreshold;
+
+    @Enumerated(value = EnumType.STRING)
+    private UnitType unitType = UnitType.CELSIUS;
+
+    @OneToMany(
+        targetEntity = MonitoringEntity.class,
+        fetch = FetchType.EAGER,
+        mappedBy = "sensor"
+    )
+    private List<MonitoringEntity> monitoringEntityList;
 
 
 }
